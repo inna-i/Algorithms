@@ -17,6 +17,7 @@ function bubbleSorting(array) {
 	return array;
 }
 
-const inputArray =  [2,50,1,23,12,34,33];
+// const inputArray =  [2,50,1,23,12,34,33];
+// console.log(bubbleSorting(inputArray));
 
-console.log(bubbleSorting(inputArray));
+module.exports = bubbleSorting;

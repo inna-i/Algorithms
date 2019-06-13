@@ -28,12 +28,12 @@ function quickSort(arr, start = 0, end = arr.length - 1) {
 	quickSort(arr, p + 1, end);
 
 	return arr;
-
 }
 
 // O(n^2)
 // avg - O(n log n)
 
-let a = [100, 300,20,4,1,500,1000];
+// let a = [100, 300,20,4,1,500,1000];
+// console.log(quickSort(a));
 
-console.log(quickSort(a));
+module.exports = quickSort;
