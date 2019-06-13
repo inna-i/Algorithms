@@ -7,36 +7,38 @@ function generateRandomArray(length) {
     return new Array(length).fill(0).map(() => Math.floor(Math.random()*length));
 }
 
-const testData = generateRandomArray(500);
-const quickSTestData = [...testData];
-const gnomeSTestData = [...testData];
-const insertionSTestData = [...testData];
-const buildInTestData = [...testData];
+function arraysEquals(array1, array2) {
+    return array1.length === array2.length && array1.every((value, index) => value === array2[index])
+}
 
+const testData = generateRandomArray(30000);
 
-console.time('bubbleSort');
-bubbleSort(testData);
-console.timeEnd('bubbleSort');
+function analyze(name, fn, array, expected, debug) {
+    const testArray = [...array];
+    console.log(`----- ${name} ------`);
+    console.time(name);
 
+    fn(testArray);
 
-console.time('quickSort');
-quickSort(quickSTestData);
-console.log(quickSTestData);
-console.timeEnd('quickSort');
+    console.timeEnd(name);
+    console.log(`${name} -> valid:`, arraysEquals(expected, testArray) ? '✔' : '✖')
 
+    if (debug) { console.log(testArray) }
+    console.log('\n');
+}
 
-console.time('gnomeSort');
-gnomeSort(gnomeSTestData);
-console.timeEnd('gnomeSort');
-
-
-console.time('insertionSort');
-insertionSort(insertionSTestData)
-console.timeEnd('insertionSort');
-
-
+console.log('\nStart...\n');
+const buildInTestData = [ ...testData];
 console.time('nativeTimSort');
-buildInTestData.sort((a,b) => a < b);
+buildInTestData.sort((a,b) => a - b);
 console.timeEnd('nativeTimSort');
+console.log('\n');
 
+
+analyze('bubbleSort', bubbleSort, testData, buildInTestData);
+analyze('quickSort', quickSort, testData, buildInTestData);
+analyze('gnomeSort', gnomeSort, testData, buildInTestData);
+analyze('insertionSort', insertionSort, testData, buildInTestData);
+
+console.log('\Done!\n');
 
