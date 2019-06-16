@@ -3,7 +3,7 @@ function swap(arr, left, right) {
 }
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
-    if (left >= right) return;
+    if (left >= right) return arr;
     
     const index = partition(arr, left, right);
     quickSort(arr, left, index - 1);
@@ -11,8 +11,8 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
     return arr;
 }
 
-function partition(arr, left, right) {
-	const pivot = arr[Math.floor((left + right) / 2)];
+function partition(arr, left = 0, right = arr.length ) {
+    const pivot = arr[Math.floor((left + right) / 2)];
     while (left <= right) {
         while (arr[left] < pivot) {
             left++;

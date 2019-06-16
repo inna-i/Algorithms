@@ -1,5 +1,6 @@
 const bubbleSort = require('./BubbleSort/bubbleSorting');
 const quickSort = require('./QuickSort/quickSort');
+const quickSortCormen = require('./QuickSort/quickSortCormen');
 const gnomeSort = require('./GnomeSort/gnomeSort');
 const insertionSort = require('./InsertionSort/insertionSort');
 
@@ -37,8 +38,9 @@ console.log('\n');
 
 analyze('bubbleSort', bubbleSort, testData, buildInTestData);
 analyze('quickSort', quickSort, testData, buildInTestData);
+analyze('quickSortCormen', quickSortCormen, testData, buildInTestData);
 analyze('gnomeSort', gnomeSort, testData, buildInTestData);
 analyze('insertionSort', insertionSort, testData, buildInTestData);
 
-console.log('\Done!\n');
+console.log('\nDone!\n');
 
