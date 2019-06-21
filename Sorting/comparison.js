@@ -5,6 +5,7 @@ const mergeSort = require('./MergeSort/mergeSort');
 const mergeSortIterative = require('./MergeSort/mergeSortIterative');
 const gnomeSort = require('./GnomeSort/gnomeSort');
 const insertionSort = require('./InsertionSort/insertionSort');
+const countingSort = require('./CountingSort/countingSort');
 
 function generateRandomArray(length) {
     return new Array(length).fill(0).map(() => Math.floor(Math.random()*length));
@@ -45,6 +46,7 @@ analyze('mergeSort', mergeSort, testData, buildInTestData);
 analyze('mergeSortIterative', mergeSortIterative, testData, buildInTestData);
 analyze('gnomeSort', gnomeSort, testData, buildInTestData);
 analyze('insertionSort', insertionSort, testData, buildInTestData);
+analyze('countingSort', countingSort, testData, buildInTestData);
 
 console.log('\nDone!\n');
 
