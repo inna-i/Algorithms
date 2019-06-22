@@ -1,3 +1,7 @@
+/**
+ *  To increase call stack size: node --stack-size=10000000 Sorting/comparison.js 50000
+ */
+
 const bubbleSort = require('./BubbleSort/bubbleSorting');
 const quickSort = require('./QuickSort/quickSort');
 const quickSortCormen = require('./QuickSort/quickSortCormen');
@@ -7,46 +11,90 @@ const gnomeSort = require('./GnomeSort/gnomeSort');
 const insertionSort = require('./InsertionSort/insertionSort');
 const countingSort = require('./CountingSort/countingSort');
 
-function generateRandomArray(length) {
-    return new Array(length).fill(0).map(() => Math.floor(Math.random()*length));
+const arraysEquals = require('../Tools/arraysEquals');
+const generateRandomArray = require('../Tools/generateRandomArray');
+const generateSortedArray = require('../Tools/generateSortedArray');
+const generateAlmostSortedArray = require('../Tools/generateAlmostSortedArray');
+
+const nativeSort = function(arr) {
+    return arr.sort((a, b) => a - b);
 }
 
-function arraysEquals(array1, array2) {
-    return array1.length === array2.length && array1.every((value, index) => value === array2[index])
+function performCheckOn(name, fn, inputArrays, compareArrays = {}) {
+    console.info(`--- checking ${name} ---`)
+    return Object.keys(inputArrays).reduce((results, key) => {
+        let testArray = [ ...inputArrays[key]];
+        console.time(key);
+
+        try {
+            testArray = fn(testArray);
+        } catch (e) {
+            console.error(`\n${key} ✖ Error!`, e.message)
+            testArray = ['invalid'];
+        }
+        
+        console.timeEnd(key);
+
+        results[key] = testArray;
+
+        if (compareArrays[key] && !arraysEquals(compareArrays[key], testArray)) {
+            console.log(`✖ invalid resut of ${key}`);
+        }
+      
+        return results;
+    }, {})
 }
 
-const testData = generateRandomArray(50000);
+function analyze(fns, size) {
+    console.info(`\nStarting comparison on ${size} integer elements...`);
+    const testDataRandom = generateRandomArray(size);
+    const testDataSorted = generateSortedArray(size);
+    const testDataAlmostSorted = generateAlmostSortedArray(size);
 
-function analyze(name, fn, array, expected, debug) {
-    let testArray = [...array];
-    console.log(`----- ${name} ------`);
-    console.time(name);
+    const inputArrays = { A: testDataRandom, B: testDataSorted, C: testDataAlmostSorted };
 
-    testArray = fn(testArray);
+    console.info(`Performing native JS sort for future comparisons...`)
+    console.info(`A - fully random \nB - sorted\nC - almost sorted\n\n`)
 
-    console.timeEnd(name);
-    console.log(`${name} -> valid:`, arraysEquals(expected, testArray) ? '✔' : '✖')
+    const compareArrays = performCheckOn(
+        'Native JS Tim sort',
+        nativeSort,
+        inputArrays,
+    );
 
-    if (debug) { console.log({ testArray, expected }) }
-    console.log('\n');
+    console.info('Starting comparison... \n')
+
+    Object
+        .keys(fns)
+        .forEach(key => {
+            performCheckOn(key, fns[key], inputArrays, compareArrays);
+            console.log('\n');
+        })
+
+    console.info('Done!')
 }
 
-console.log('\nStart...\n');
-const buildInTestData = [ ...testData];
-console.time('nativeTimSort');
-buildInTestData.sort((a,b) => a - b);
-console.timeEnd('nativeTimSort');
-console.log('\n');
+const getSize = defaultSize => {
+    const args = process.argv.slice(2);
+    
+    if (args.length > 0) {
+        const fromCmd = Number(args[0]);
+        if (isNaN(fromCmd)) {
+            return defaultSize;
+        }
+        return fromCmd;
+    }
 
+    return defaultSize;
+}
 
-analyze('bubbleSort', bubbleSort, testData, buildInTestData);
-analyze('quickSort', quickSort, testData, buildInTestData);
-analyze('quickSortCormen', quickSortCormen, testData, buildInTestData);
-analyze('mergeSort', mergeSort, testData, buildInTestData);
-analyze('mergeSortIterative', mergeSortIterative, testData, buildInTestData);
-analyze('gnomeSort', gnomeSort, testData, buildInTestData);
-analyze('insertionSort', insertionSort, testData, buildInTestData);
-analyze('countingSort', countingSort, testData, buildInTestData);
-
-console.log('\nDone!\n');
-
+analyze({
+    bubbleSort,
+    quickSort,
+    quickSortCormen,
+    mergeSort,
+    mergeSortIterative,
+    gnomeSort,
+    insertionSort,
+    countingSort
+}, getSize(1000));
