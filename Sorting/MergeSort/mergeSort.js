@@ -17,14 +17,14 @@ function merge(a, b) {
 	return res;
 }
 
-function sort(arr) {
+function mergeSort(arr) {
 	if (arr.length < 2) return arr;
 	let middle = Math.floor(arr.length / 2);
 	
 	return merge(
-		sort(arr.slice(0, middle)),
-		sort(arr.slice(middle))
+		mergeSort(arr.slice(0, middle)),
+		mergeSort(arr.slice(middle))
 	)
 }
 
-module.exports = sort;
+module.exports = mergeSort;

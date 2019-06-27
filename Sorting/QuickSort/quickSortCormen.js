@@ -14,6 +14,8 @@ function swap(arr, i, j) {
     arr[j] = temp;
 }
 
+// [1, 100, 10, 1000, 20]
+
 function partition(arr, left = 0, right = arr.length - 1) {
     let pivot = arr[right];
     let i = left - 1;
