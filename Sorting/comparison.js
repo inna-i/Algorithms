@@ -11,6 +11,7 @@ const gnomeSort = require('./GnomeSort/gnomeSort');
 const insertionSort = require('./InsertionSort/insertionSort');
 const countingSort = require('./CountingSort/countingSort');
 const heapSort = require('./HeapSort/heapSort');
+const selectionSort = require('./SelectionSort/selectionSort');
 
 const arraysEquals = require('../Tools/arraysEquals');
 const generateRandomArray = require('../Tools/generateRandomArray');
@@ -98,5 +99,6 @@ analyze({
     gnomeSort,
     insertionSort,
     heapSort,
-    countingSort
+    countingSort,
+    selectionSort,
 }, getSize(1000));
