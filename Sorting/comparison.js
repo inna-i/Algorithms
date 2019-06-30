@@ -10,6 +10,7 @@ const mergeSortIterative = require('./MergeSort/mergeSortIterative');
 const gnomeSort = require('./GnomeSort/gnomeSort');
 const insertionSort = require('./InsertionSort/insertionSort');
 const countingSort = require('./CountingSort/countingSort');
+const heapSort = require('./HeapSort/heapSort');
 
 const arraysEquals = require('../Tools/arraysEquals');
 const generateRandomArray = require('../Tools/generateRandomArray');
@@ -96,5 +97,6 @@ analyze({
     mergeSortIterative,
     gnomeSort,
     insertionSort,
+    heapSort,
     countingSort
 }, getSize(1000));
