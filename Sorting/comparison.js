@@ -13,6 +13,7 @@ const countingSort = require('./CountingSort/countingSort');
 const heapSort = require('./HeapSort/heapSort');
 const selectionSort = require('./SelectionSort/selectionSort');
 const shakerSort = require('./ShakerSort/shakerSort');
+const radixSort = require('./RadixSort/radixSort');
 
 const arraysEquals = require('../Tools/arraysEquals');
 const generateRandomArray = require('../Tools/generateRandomArray');
@@ -103,4 +104,5 @@ analyze({
     countingSort,
     selectionSort,
     shakerSort,
+    radixSort,
 }, getSize(1000));
