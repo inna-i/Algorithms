@@ -10,7 +10,7 @@ class BinarySearchTree {
 	constructor() {
 		this.root = null;
 	}
-
+	// Add new Node with {value}
 	add(value) {
 		if(!this.root) {
 			this.root = new Node(value);
@@ -38,6 +38,7 @@ class BinarySearchTree {
 		}
 	}
 
+	// Find Node with {value}
 	find(value) {
 		let temp = this.root;
 
@@ -62,6 +63,7 @@ class BinarySearchTree {
 		}
 	}
 
+	// Check if Node with {value} exists
 	contains(value) {
 		let node = this.find(value);
 		if (node) {
@@ -70,13 +72,11 @@ class BinarySearchTree {
 		return false;
 	}
 
-
-	traversePreorder(node = this.root) {
-		return node
-			? [node.value, ...this.traversePreorder(node.left), ...this.traversePreorder(node.right)]
-			: [];        
-	}
-
+	// Traversing
+	//    B
+	// A     C
+	
+	// A, B, C
 	traverseInOrder(node = this.root) {
 	   let res = []; 
 	   function traverse(node) {
@@ -96,7 +96,14 @@ class BinarySearchTree {
 	   return res;
 	}
 
+	// B, A, C
+	traversePreorder(node = this.root) {
+		return node
+		? [node.value, ...this.traversePreorder(node.left), ...this.traversePreorder(node.right)]
+		: [];        
+	}
 
+	// A, C, B
 	traversePostorder() {
 		let res = []; 
 		function traverse(node) {
@@ -118,7 +125,7 @@ class BinarySearchTree {
 }
 
 const tree = new BinarySearchTree();
-tree.add(5).add(2).add(6).add(100);
+tree.add(5).add(2).add(-1).add(6).add(100);
 
 // console.log(tree);
 
