@@ -48,6 +48,7 @@ class BinarySearchTree {
 
 		while(true) {
 			if(temp.value === value) {
+				console.log('temp  - ', temp)
 				return temp;
 			} else if (temp.value < value) {
 				if(!temp.right) {
@@ -125,13 +126,18 @@ class BinarySearchTree {
 }
 
 const tree = new BinarySearchTree();
-tree.add(5).add(2).add(-1).add(6).add(100);
+tree
+	.add(5)
+	.add(2)
+	.add(6)
+	.add(100)
+	.add(50);
 
-// console.log(tree);
+console.log(tree);
 
-//    5
-//  2    6
-//         100
+//     5
+//  2      6
+//            100
 
 console.log(tree.find(2));
 console.log(tree.find(100));

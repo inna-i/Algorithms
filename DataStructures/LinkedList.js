@@ -2,10 +2,11 @@ class Node {
 	constructor(value, next) {
 		this.value = value;
 		this.next = null;
+		this.prev = null;
 	}
 }
 
-class List {
+class LinkedList {
 	constructor() {
 		this.head = null;
 		this.tail = null;
@@ -112,15 +113,15 @@ class List {
 	}
 }
 
-const list = new List();
+const list = new LinkedList();
 list.push(1).push(2).push(3).push(4);
 
-console.log(list.toString());
+// console.log(list.toString());
 
-console.log(list.remove(1));
-console.log(list.toString());
-console.log(list.remove(0));
-console.log(list.toString());
-console.log(list.remove(333));
-console.log(list.toString());
+// console.log(list.remove(1));
+// console.log(list.toString());
+// console.log(list.remove(0));
+// console.log(list.toString());
+// console.log(list.remove(333));
+// console.log(list.toString());
 

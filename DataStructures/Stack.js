@@ -23,7 +23,6 @@ class Stack {
         return this.items.length === 0;
     }
 
-
     print() {
         let str = "Stack: ";
 
@@ -33,9 +32,9 @@ class Stack {
 
         return str;
     }
-
 }
 
+// LIFO - last in first out
 
 const stack = new Stack();
 
