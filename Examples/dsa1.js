@@ -1,17 +1,3 @@
-function compareFunction(fn1, fn2, n = 1) {
-  console.time("Fn1");
-  for(let i =0 ; i < n; i++) {
-     fn1;
-  }
-  console.timeEnd("Fn1");
-  console.time("Fn2");
-  for(let i =0 ; i < n; i++) {
-      fn2;
-  }
-   console.timeEnd("Fn2"); 
-}
-
-
 /**********************************************/
 /****************   Task 1   ******************/
 /**********************************************/
@@ -43,51 +29,59 @@ function filterAndExtendItemsReduce(array) {
     }, []);
 }
 
-
-compareFunction(
-  filterAndExtendItems(itemsArray),
-  filterAndExtendItemsReduce(itemsArray),
-  1
-);
-
-
+// console.log(filterAndExtendItems(itemsArray));
+// console.log(filterAndExtendItemsReduce(itemsArray));
 /**********************************************/
 /****************   Task 2   ******************/
 /**********************************************/
 // calculate the amount of a given symbol in a given string
-const inputStr = "Remember, all I’m offering is the truth. Nothing more.";
+const inputStr = "Remember, all I'm offering is the truth. Nothing more.";
 
 function calcStringSymbols(str, symbol) {
   const arr = str.split('');
-  let count = 0;
+  let amount = 0;
 
   for(let i=0; i < arr.length; i++) {
     if (arr[i] === symbol) {
-      count += 1;
+      amount += 1;
     } 
   }
 
-  return count;
+  return amount;
 }
 
 function calcStringSymbolsWithoutSplit(str, symbol) {
-  let count = 0;
+  let amount = 0;
 
   for(let i=0; i < str.length; i++) {
     if (str.charAt(i) === symbol) {
-      count += 1;
+      amount += 1;
     } 
   }
 
-  return count;
+  return amount;
 }
 
-compareFunction(
-  calcStringSymbols(inputStr, 'm'),
-  calcStringSymbolsWithoutSplit(inputStr, 'm'),
-  1
-);
+function calcStringSymbolsWithDC(str, symbol) {
+  let amount = 0;
+  const len = str.length;
 
+  for(let i=0; i < len/2; i++) {
+    if (str.charAt(i) === symbol) {
+      amount += 1;
+    }     
+
+    if (str.charAt(len - i - 1) === symbol) {
+      amount += 1;
+    } 
+  }
+
+  return amount;
+}
+
+console.log('calcStringSymbols ', calcStringSymbols(inputStr, 'm'));
+console.log('calcStringSymbolsWithoutSplit ', calcStringSymbolsWithoutSplit(inputStr, 'm'));
+console.log('calcStringSymbolsWithDC ', calcStringSymbolsWithDC(inputStr, 'm'));
 
 /**********************************************/
 /****************   Task 3   ******************/
@@ -111,8 +105,6 @@ const config = {
       online: true,    
     },
 };
-
-
 
 function getProductConfig(type, cb) {
   switch(type) {
@@ -146,10 +138,6 @@ function getProductConfigObj(type, cb) {
   return cb(config[type] || {});
 }
  
-
-compareFunction(
-  getProductConfig('book', (conf) => conf),
-  getProductConfigObj('book', (conf) => conf),
-  1
-);
+// console.log(getProductConfig('book', (conf) => conf));
+// console.log(getProductConfigObj('book', (conf) => conf));
 
