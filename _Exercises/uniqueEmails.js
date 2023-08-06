@@ -2,19 +2,7 @@
  * @param {string[]} emails
  * @return {number}
  */
-const numUniqueEmails = function(emails) {
-    const uniqueEmails = new Set()
-
-    emails.forEach(mail => {
-        const [local, domain] = mail.split('@');
-        const name = local.split('+')[0].replaceAll('.', '');
-        const cleanMail = name + '@' + domain;
-
-        uniqueEmails.add(cleanMail)    
-    });
-    
-    return uniqueEmails.size;
-};
+const numUniqueEmails = function(emails) {};
 
 
 /* Examples:

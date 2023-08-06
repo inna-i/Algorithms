@@ -5,11 +5,14 @@ class Stack {
 
     push(element) {
         this.items.push(element);
+
+        return this;
     }
 
     pop() {
-        if (this.items.length === 0) {
-            console.error("Stack is empty");
+        if (this.items === 0) {
+            console.error("The Stack is empty");
+            return null;
         }
 
         return this.items.pop();
@@ -20,41 +23,24 @@ class Stack {
     }
 
     isEmpty() {
-        return this.items.length === 0;
+        return this.items.length === 0; 
     }
 
     print() {
-        let str = "Stack: ";
-
-        for (let i = 0; i < this.items.length; i++) {
-            str += this.items[i] + " ";
-        }
-
-        return str;
+        return this.items.join(', ');
     }
 }
 
-// LIFO - last in first out
-
+// LIFO
 const stack = new Stack();
 
-console.log(stack.isEmpty());
-
-stack.push(1);
-
-stack.push(2);
-stack.push(3);
-stack.push(4);
+stack.push(1).push(2).push(3).push(10);
 
 console.log(stack.print());
 
-console.log(stack.peak());
+stack.pop();
+stack.push(333);
 
-stack.pop();
-stack.pop();
-stack.pop();
-stack.pop();
-stack.pop();
+console.log(stack.peak())
 
 console.log(stack.print());
-

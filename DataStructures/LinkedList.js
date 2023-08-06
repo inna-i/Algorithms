@@ -116,9 +116,9 @@ class LinkedList {
 const list = new LinkedList();
 list.push(1).push(2).push(3).push(4);
 
-// console.log(list.toString());
+console.log(list.toString());
 
-// console.log(list.remove(1));
+console.log(list.remove(1));
 // console.log(list.toString());
 // console.log(list.remove(0));
 // console.log(list.toString());
