@@ -23,9 +23,8 @@ function pallindrome(word) {
             return true;
         }
     } // O(n/2) => O(n)
-
 }
 
 console.log(pallindrome('anna'));
 console.log(pallindrome('react'));
-console.log(pallindrome('anrna'));
+console.log(pallindrome('tenet'));
