@@ -5,7 +5,10 @@ class Node {
 		this.prev = null;
 	}
 }
-
+// head -> node -> node -> tail
+// 1 head -> tail
+// 2 [{head} -> { node (oldTail)} -> {tail (new)}]
+// { head: { next: { }}, tail: { next: {} } }
 class LinkedList {
 	constructor() {
 		this.head = null;
@@ -13,8 +16,9 @@ class LinkedList {
 	}
 
 	getNode(index) {
-		if (index < 0) return 0;
-		if (index === 0 && this.head) return this.head;
+		if (index < 0) return null;
+
+		if(index === 0 && this.head) return this.head;
 
 		let currentNode = this.head;
 		while (index > 0 && currentNode && currentNode.next) {
@@ -25,6 +29,7 @@ class LinkedList {
 		if (index !== 0) {
 			return null;
 		}
+
 		return currentNode;
 	}
 
@@ -36,13 +41,14 @@ class LinkedList {
 		if (!this.head) {
 			this.head = new Node(value);
 			this.tail = this.head;
+
 			return this;
 		}
 
-	   this.tail.next = new Node(value);
-	   this.tail = this.tail.next;
+		this.tail.next = new Node(value);
+		this.tail = this.tail.next;
 
-	   return this;
+		return this;
 	}
 
 	pop () {
@@ -116,9 +122,10 @@ class LinkedList {
 const list = new LinkedList();
 list.push(1).push(2).push(3).push(4);
 
+console.log(list)
 console.log(list.toString());
 
-console.log(list.remove(1));
+// console.log(list.remove(1));
 // console.log(list.toString());
 // console.log(list.remove(0));
 // console.log(list.toString());

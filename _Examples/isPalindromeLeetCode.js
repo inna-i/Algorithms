@@ -6,12 +6,21 @@
  * @param {string} s
  * @return {boolean}
  */
+// Verion 1
+const isPalindrome1 = function(s) {
+    const newStr = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+    const reversed = newStr.split("").reverse();
+    return reversed.join("") === newStr;
+}
+
+//Version 2:  Divide & conquer
 const isPalindrome = function(s) {
     s = s.toLowerCase().replace(/[^a-z0-9]/g, '');
     let left = 0;
     let right = s.length - 1;
     
-    while(left< right){
+    while(left < right){
         if(s[left] !== s[right]){
             return false;
         }
@@ -21,6 +30,18 @@ const isPalindrome = function(s) {
     return true;
 };
 
+// Version 3
+function isPalindrome41(s) {
+    const str = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+    for (let i = 0; i <= str.length / 2; i++) {
+        if(str.charAt(i) !== str.charAt(str.length - 1 - i)) {
+            return false;
+        } 
+    } // O(n/2) => O(n)
+
+    return true;
+}
 // Example 1:
 // Input: s = "A man, a plan, a canal: Panama"
 // Output: true

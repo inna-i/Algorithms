@@ -1,60 +1,65 @@
 const WEIRD_NUMBER = 23;
 
 function hash(str, limit = 53) {
-    let result = 0;
+  let result = 0;
 
-    for(let i=0; i < Math.min(str.length, 100); i++) {
-        result += (str.charCodeAt(i) - 96) * WEIRD_NUMBER;
-    }
+  for (let i = 0; i < Math.min(str.length, 100); i++) {
+    result += (str.charCodeAt(i) - 96) * WEIRD_NUMBER;
+  }
 
-    return Math.abs(result % limit);
+  return Math.abs(result % limit);
 }
-
-
+// console.log('hash  ', hash('black'));
+// HashMap
 class HashTable {
-    constructor() {
-        this.array = new Array(10);
+  constructor() {
+    this.array = new Array(10);
+  }
+
+  set(key, value) {
+    const keyHash = hash(key, this.array.length);
+
+    if (!this.array[keyHash]) {
+      this.array[keyHash] = [];
     }
 
-    set(key, value) {
-        const keyHash = hash(key, this.array.length);
-        
-        if(!this.array[keyHash]) {
-            this.array[keyHash] = [];
-        }
-        const bucket = this.array[keyHash];
-        bucket.push([key, value]);
+    const bucket = this.array[keyHash];
+    bucket.push([key, value]);
+  }
+
+  get(key) {
+    const keyHash = hash(key, this.array.length);
+    const bucket = this.array[keyHash];
+
+    if (!bucket) {
+      return null;
     }
 
-    get(key) {
-        const keyHash = hash(key, this.array.length);
-        const bucket = this.array[keyHash];
+    for (let i = 0; i < bucket.length; i++) {
+      const entries = bucket[i];
 
-        for(let i = 0; i < bucket.length; i++) {
-            const entries = bucket[i];
-            if (entries[0] === key) {
-                return entries[1];
-            }
-        }
-            
-        return;
+      if (entries[0] === key) {
+        return entries[1];
+      }
     }
 
-    keys() {
-        const result = [];
+    return;
+  }
 
-        for (let i = 0; i < this.array.length; i++) {
-            if(this.array[i]) {
-                this.array[i].forEach(entry => {
-                    result.push(entry[0]);
-                });
-            }
-        }
+  keys() {
+    const result = [];
 
-        return result;
+    for (let i = 0; i < this.array.length; i++) {
+      if (this.array[i]) {
+        this.array[i].forEach(entry => {
+          result.push(entry);
+        });
+      }
     }
+
+    return result;
+  }
 }
-
 
 const test = new HashTable();
 

@@ -1,46 +1,53 @@
 class Stack {
-    constructor() {
-        this.items = [];
+  constructor() {
+    this.items = [];
+  }
+
+  // Add new element to the end
+  push(element) {
+    this.items.push(element);
+
+    return this;
+  }
+
+  // remove he last element
+  pop() {
+    if (this.isEmpty()) {
+      console.warn('Array is empty');
+      return null;
     }
 
-    push(element) {
-        this.items.push(element);
+    return this.items.pop();
+  }
 
-        return this;
+  // get the last element
+  peek() {
+    if (this.isEmpty()) {
+      console.warn('Array is empty');
+      return null;
     }
+    return this.items.at(-1);
+  }
 
-    pop() {
-        if (this.items === 0) {
-            console.error("The Stack is empty");
-            return null;
-        }
+  isEmpty() {
+    return this.items.length === 0;
+  }
 
-        return this.items.pop();
-    }
-
-    peak() {
-        return this.items[this.items.length - 1];
-    }
-
-    isEmpty() {
-        return this.items.length === 0; 
-    }
-
-    print() {
-        return this.items.join(', ');
-    }
+  toString() {
+    return this.items.join(', ');
+  }
 }
 
-// LIFO
+// LIFO => Last in Last Out
 const stack = new Stack();
+console.log(stack.isEmpty());
 
 stack.push(1).push(2).push(3).push(10);
 
-console.log(stack.print());
+console.log(stack.toString());
 
-stack.pop();
+console.log(stack.pop());
 stack.push(333);
-
-console.log(stack.peak())
-
-console.log(stack.print());
+console.log(stack.peek());
+console.log(' after pop  ', stack.toString());
+console.log(stack.toString());
